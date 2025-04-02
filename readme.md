@@ -112,3 +112,5 @@ echo $secAccount->saldo;
 200
 ```
 ## Criado o arquivo de testes banco.php
+
+Resolvi alterar um pouco os metódos de validação, seguindo um pouco diferente do proposto no curso de estudo, pois além de achar o exit uma má saída o throw me da um monitoramento melhor da execução podendo ser capturado em try catch, além de não parar abruptamente a execução como o exit, optei também por criar uma validação do cpf com base na validação real existente do formato de um cpf para adicionar dinamicidade; 
