@@ -1,48 +1,45 @@
 <?php
 
-class Conta {
+class Conta
+{
 
     public string $cpfTitular;
     public string $nomeTitular;
     public float $saldo = 0;
 
 
-    public function sacar(float $valorSaque): void
+    public function sacar(float $valorSaque)
     {
 
         if ($valorSaque > $this->saldo) {
-            echo "Saldo insuficiente para saque.";
-            return;
+            return "Saldo insuficiente para saque.";
         }
 
         $this->saldo -= $valorSaque;
 
-        echo "Saque de R$ {$valorSaque} realizado com sucesso. Saldo atual: R$ {$this->saldo}.";
+        return "Saque de R$ {$valorSaque} realizado com sucesso. Saldo atual: R$ {$this->saldo}.";
     }
 
-    public function depositar(float $valorDeposito): void
+    public function depositar(float $valorDeposito)
     {
         if ($valorDeposito <= 0) {
-            echo "Valor de depósito inválido.";
-            return;
+            return "Valor de depósito inválido.";
         }
 
         $this->saldo += $valorDeposito;
 
-        echo "Depósito de R$ {$valorDeposito} realizado com sucesso. Saldo atual: R$ {$this->saldo}.";
+        return "Depósito de R$ {$valorDeposito} realizado com sucesso. Saldo atual: R$ {$this->saldo}.";
     }
 
-    public function transferir(float $valorTransferencia, Conta $contaDestino): void
+    public function transferir(float $valorTransferencia, Conta $contaDestino)
     {
         if ($valorTransferencia > $this->saldo) {
-            echo "Saldo insuficiente para transferência.";
-            return;
+            return "Saldo insuficiente para transferência.";
         }
 
         $this->sacar($valorTransferencia);
         $contaDestino->depositar($valorTransferencia);
 
-        echo "Transferência de R$ {$valorTransferencia} realizada com sucesso. Saldo atual: R$ {$this->saldo}.";
+        return "Transferência de R$ {$valorTransferencia} realizada com sucesso. Saldo atual: R$ {$this->saldo}.";
     }
-
 }

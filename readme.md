@@ -70,7 +70,7 @@ Verificando o saldo da $firstAccount e sua saida esperada:
 }
 ```
 
-## Criando uma nova conta ($secondAccount) e testando operações:
+## 📌 Criando uma nova conta ($secondAccount) e testando operações:
 
 ```php
 $secondAccount = new Conta();
@@ -94,7 +94,17 @@ echo $secondAccount->saldo;
 450
 ```
 
+Desse ponto em diante, resolvi refatorar a base de código alterando o uso do echo, para um return, optei pelo early returns, evitando o uso de else e mantendo a estrutura do código mais limpa e direta. 
 
+## Testando o prodecimento de metodo de transferencia que engloba os demais metodos
 
-
-
+```php
+$firstAccount = new Conta();
+$secAccount = new Conta();
+echo $firstAccount->depositar(1000);
+Depósito de R$ 1000 realizado com sucesso. Saldo atual: R$ 2000.
+echo $firstAccount->transferir(200, $secAccount);
+Transferência de R$ 200 realizada com sucesso. Saldo atual: R$ 1800.
+echo $secAccount->saldo;
+200
+```
