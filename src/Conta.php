@@ -2,19 +2,23 @@
 
 class Conta
 {
-
-    private string $cpfTitular;
-    private string $nomeTitular;
+    private $titular;
     private float $saldo;
 
+    private static $numeroDeContas = 0;
 
-    public function __construct(string $cpfTitular, string $nomeTitular)
+
+    public function __construct(Titular $titular)
     {
-        $this->validateCpf($cpfTitular);
-        $this->cpfTitular = $cpfTitular;
-        $this->validateNome($nomeTitular);
-        $this->nomeTitular = $nomeTitular;
+        $this->titular = $titular;
         $this->saldo = 0;
+
+        self::$numeroDeContas++;
+    }
+
+    public function __destruct()
+    {
+        self::$numeroDeContas--;
     }
 
     public function saca(float $valorSaque)
@@ -57,46 +61,13 @@ class Conta
         return $this->saldo;
     }
 
-
-    public function getCpfTitular(): string
+    public static function getNumeroDeContas(): int
     {
-        return $this->cpfTitular;
-
+        return self::$numeroDeContas;
     }
 
-    public function getNomeTitular(): string
+    public function getTitular(): Titular
     {
-        return $this->nomeTitular;
-    }
-
-    private function validateCpf(string $cpf): void
-    {
-        $cpf = preg_replace('/\D/', '', $cpf);
-
-        if (strlen($cpf) !== 11 || preg_match('/(\d)\1{10}/', $cpf)) {
-            throw new InvalidArgumentException("CPF inválido.");
-        }
-
-        for ($t = 9; $t < 11; $t++) {
-            $d = 0;
-            for ($c = 0; $c < $t; $c++) {
-                $d += $cpf[$c] * (($t + 1) - $c);
-            }
-            $d = ((10 * $d) % 11) % 10;
-            if ($cpf[$t] != $d) {
-                throw new InvalidArgumentException("CPF inválido.");
-            }
-        }
-    }
-
-    private function validateNome(string $nomeTitular): void
-    {
-        if (empty($nomeTitular)) {
-            throw new InvalidArgumentException("Nome inválido.");
-        }
-
-        if (strlen($nomeTitular) < 3) {
-            throw new InvalidArgumentException("Nome deve ter pelo menos 3 caracteres.");
-        }
+        return $this->titular;
     }
 }
