@@ -16,6 +16,9 @@ Para rodar os exemplos deste repositório, você precisa:
 
 ---
 
+ Inicialmente os testes foram feitos utilizando o terminal interativo do php (php -a).
+
+
 ## 📌 Criando uma conta e manipulando saldo
 
 O código abaixo demonstra a criação de uma conta bancária usando a classe `Conta`:
@@ -108,3 +111,4 @@ Transferência de R$ 200 realizada com sucesso. Saldo atual: R$ 1800.
 echo $secAccount->saldo;
 200
 ```
+## Criado o arquivo de testes banco.php
